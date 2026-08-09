@@ -1,0 +1,18 @@
+# Unity 권장 .gitattributes 설정
+* text=auto
+
+# 텍스트 파일은 LF로 통일
+*.cs text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.asmdef text eol=lf
+
+# Unity 바이너리 파일은 변환하지 않음
+*.asset binary
+*.prefab binary
+*.unity binary
+*.png binary
+*.jpg binary
