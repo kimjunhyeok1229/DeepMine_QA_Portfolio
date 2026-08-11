@@ -135,12 +135,14 @@ public class SpawnTile : MonoBehaviour
         GameObject emetyLine = PoolManager.instance.GetObj(PoolType.Line);
         emetyLine.SetActive(true);
         emetyLine.transform.position = new Vector3(10, y, 0);
-        emetyLine.transform.parent = map.transform;
+        //emetyLine.transform.parent = map.transform;
+        emetyLine.transform.SetParent(map.transform, true);
         emetyLine.name = "Line";
         for (pos.x = 0; pos.x < 20; pos.x++)
         {
             Tile tile = SetTile(pos, type);
-            tile.gameObject.transform.parent = emetyLine.transform;
+            //tile.gameObject.transform.parent = emetyLine.transform;
+            tile.gameObject.transform.SetParent(emetyLine.transform, true);
         }
         Lines.Add(emetyLine);
     }
@@ -152,7 +154,8 @@ public class SpawnTile : MonoBehaviour
         GameObject emetyLine = PoolManager.instance.GetObj(PoolType.Line);
         emetyLine.SetActive(true);
         emetyLine.transform.position = new Vector3(10, y, 0);
-        emetyLine.transform.parent = map.transform;
+        //emetyLine.transform.parent = map.transform;
+        emetyLine.transform.SetParent(map.transform, true);
         emetyLine.name = "Line";
         for (pos.x = 0; pos.x < 20; pos.x++)
         {
@@ -164,14 +167,16 @@ public class SpawnTile : MonoBehaviour
                     GameObject obj = PoolManager.instance.GetObj(PoolType.monster);
                     obj.transform.position = p;
                     obj.SetActive(true);
-                    obj.transform.parent = emetyLine.transform;
+                    //obj.transform.parent = emetyLine.transform;
+                    obj.transform.SetParent(emetyLine.transform, true);
                 }
                 SearchMine(p, emetyLine.transform); 
             }
             else
             {
                 Tile tile = RandomSpawnTile(pos);
-                tile.gameObject.transform.parent = emetyLine.transform;
+                //tile.gameObject.transform.parent = emetyLine.transform;
+                tile.gameObject.transform.SetParent(emetyLine.transform, true);
             }
         }
         pos.x = emety1;
@@ -190,7 +195,8 @@ public class SpawnTile : MonoBehaviour
                 foreach(Transform t in obj.GetComponentsInChildren<Transform>())
                 {
                     t.gameObject.SetActive(false);
-                    t.transform.parent = PoolManager.instance.gameObject.transform;
+                    //t.transform.parent = PoolManager.instance.gameObject.transform;
+                    t.transform.SetParent(PoolManager.instance.gameObject.transform, true);
                 }
 
                 obj.transform.DetachChildren();
@@ -277,7 +283,8 @@ public class SpawnTile : MonoBehaviour
         GameObject obj = PoolManager.instance.GetObj(PoolType.MineText);
         obj.GetComponent<TextMeshPro>().text = count == 0 ? "" : count.ToString();
         obj.transform.position = pos;
-        obj.transform.parent = parent;
+        //obj.transform.parent = parent;
+        obj.transform.SetParent(parent, true);
         obj.SetActive(true);
         nums.Add(obj);
 
@@ -301,7 +308,8 @@ public class SpawnTile : MonoBehaviour
         GameObject obj = PoolManager.instance.GetObj(PoolType.MineText);
         obj.GetComponent<TextMeshPro>().text = count == 0 ? "" : count.ToString();
         obj.transform.position = t.transform.position;
-        obj.transform.parent = t.transform.parent;
+        //obj.transform.parent = t.transform.parent;
+        obj.transform.SetParent(t.transform.parent, true);
         obj.SetActive(true);
         nums.Add(obj);
 
@@ -388,7 +396,8 @@ public class SpawnTile : MonoBehaviour
         PoolType type = RandomItemType();
         GameObject obj = PoolManager.instance.GetObj(type);
         obj.transform.position = tile.transform.position;
-        obj.transform.parent = tile.transform.parent;
+        //obj.transform.parent = tile.transform.parent;
+        obj.transform.SetParent(tile.transform.parent, true);
         obj.GetComponent<Item>().tilemanager = this;
         obj.SetActive(true);
     }
@@ -398,7 +407,8 @@ public class SpawnTile : MonoBehaviour
         GameObject obj = PoolManager.instance.GetObj(PoolType.TreasureChest);
         obj.transform.position = tile.transform.position;
         obj.SetActive(true);
-        obj.transform.parent = tile.transform.parent;
+        //obj.transform.parent = tile.transform.parent;
+        obj.transform.SetParent(tile.transform.parent, true);
         StartCoroutine(DestroyChest(obj.GetComponent<Tile>()));
     }
 
@@ -426,7 +436,8 @@ public class SpawnTile : MonoBehaviour
             SearchMine(h.transform);
         GameObject boomEffect = PoolManager.instance.GetObj(PoolType.boom);
         boomEffect.transform.position = t.position;
-        boomEffect.transform.parent = t.parent;
+        //boomEffect.transform.parent = t.parent;
+        boomEffect.transform.SetParent(t.parent, true);
         boomEffect.SetActive(true);
         AudioManager.instance?.Play_Sfx(SFXList.Effect_Boom);
         RaycastHit2D playerhit = Physics2D.CircleCast(t.position, 3, Vector2.zero, 0, playermask);

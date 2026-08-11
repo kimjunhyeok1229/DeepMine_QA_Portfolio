@@ -31,7 +31,8 @@ public class PoolManager : MonoBehaviour
             for (int i = 0; i < poolPrefab.startPrefab; i++)
             {
                 GameObject obj = Instantiate(poolPrefab.prefab);
-                obj.transform.parent = transform;
+                //obj.transform.parent = transform;
+                obj.transform.SetParent(transform, true);
                 obj.SetActive(false);
                 poolPrefab.list.Add(obj);
             }
@@ -69,7 +70,8 @@ public class PoolManager : MonoBehaviour
             if (poolPrefab.type == type)
             {
                 obj = Instantiate(poolPrefab.prefab);
-                obj.transform.parent = transform;
+                //obj.transform.parent = transform;
+                obj.transform.SetParent(transform, true);
                 obj.SetActive(false);
                 poolPrefab.list.Add(obj);
                 break;

@@ -19,7 +19,7 @@ namespace DeepMine.Playmode
 
         int tileCount;                
 
-        [OneTimeSetUp]
+        [UnitySetUp]
         public IEnumerator SetUp()
         {
             SceneManager.LoadScene(
